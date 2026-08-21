@@ -17,19 +17,23 @@ package com.strk.jarvislauncher.actions
  * ADD TO THIS LIST: any banking app, payment app (PhonePe, GPay, iMobile),
  * authenticator/2FA app, Secure Folder, or anything handling credentials.
  *
- * TODO: populate exact package names once confirmed via:
- *   adb shell pm list packages -3
- * Examples to verify and add:
- *   "com.phonepe.app"
- *   "com.google.android.apps.nbu.paisa.user"   // GPay
- *   "com.csam.icici.bank.imobile"               // iMobile — verify exact ID
- *   "com.google.android.apps.authenticator2"    // or whichever authenticator is installed
- *   "com.samsung.knox.securefolder"             // verify exact ID
+ * Populated from the apps actually installed on the target device (Samsung F15 5G).
+ * Still confirm every entry with `adb shell pm list packages -3` before relying on
+ * this — a wrong package string here is silently ineffective (not dangerous, just
+ * not protecting anything), so don't treat this list as verified until you have.
  */
 object SecurityDenylist {
 
     val LAUNCH_ONLY_PACKAGES: Set<String> = setOf(
-        // TODO: fill in real package names — see comment above
+        "com.phonepe.app",                          // PhonePe
+        "com.google.android.apps.nbu.paisa.user",   // Google Pay
+        "com.csam.icici.bank.imobile",              // ICICI iMobile Pay
+        "com.samsung.android.securefolder",         // Samsung Secure Folder
+        "com.google.android.apps.authenticator2",   // Authenticator — verify this is the
+                                                     // installed one and not Microsoft
+                                                     // Authenticator (com.azure.authenticator)
+        // TODO: Zoho Payroll is also installed and handles sensitive payroll/financial
+        // data — add it once its exact package ID is confirmed via adb.
     )
 
     fun isRestricted(packageName: String): Boolean = packageName in LAUNCH_ONLY_PACKAGES
