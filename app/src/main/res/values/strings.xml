@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Hi Strk</string>
+    <string name="voice_toggle_label">Voice Assistant (\"Hi Strk\")</string>
+    <string name="voice_toggle_description">When on, listens in the background for the wake word. Uses a small amount of battery while active.</string>
+</resources>

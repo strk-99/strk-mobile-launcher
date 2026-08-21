@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.JarvisLauncher" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- TODO: dark theme, cyan/blue accent per our HUD-style visual direction —
+             see frontend-design skill once we get to UI polish pass -->
+    </style>
+</resources>

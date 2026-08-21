@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ===== CORE — requested at first launch ===== -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- ===== Requested contextually, only when user first tries that command ===== -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+
+    <!--
+        DELIBERATELY NOT REQUESTED — see actions/SecurityDenylist.kt:
+        - BIND_ACCESSIBILITY_SERVICE  (not needed for v1's deep-link-only actions;
+          would enable UI automation over banking apps, which we're avoiding entirely)
+        - READ_SMS                     (Play-sensitive, requires default-SMS-handler status)
+        - MANAGE_EXTERNAL_STORAGE      (Play-sensitive; MediaStore covers our v1 file needs)
+        - WRITE_SETTINGS                (add later, only for brightness/DND toggles, manual grant)
+    -->
+
+    <application
+        android:name=".MainApplication"
+        android:allowBackup="false"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/Theme.JarvisLauncher"
+        android:usesCleartextTraffic="false">
+
+        <!-- ===== Launcher (home screen replacement) ===== -->
+        <activity
+            android:name=".launcher.LauncherActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:stateNotNeeded="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:exported="false" />
+
+        <!--
+            Wake-word foreground service.
+            IMPORTANT: only ever started when the user flips the voice toggle ON
+            in Settings. Never auto-starts at boot. Fully torn down (not just paused)
+            when toggled OFF — see voice/wakeword/WakeWordService.kt
+        -->
+        <service
+            android:name=".voice.wakeword.WakeWordService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+    </application>
+</manifest>
