@@ -1,0 +1,11 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Placeholder mark for the adaptive icon foreground; real branding is
+         part of the UI polish pass (see README), not this skeleton. -->
+    <path
+        android:fillColor="#00B8D4"
+        android:pathData="M30,54 a24,24 0 1,0 48,0 a24,24 0 1,0 -48,0 Z" />
+</vector>

@@ -3,22 +3,29 @@ package com.strk.jarvislauncher.launcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.strk.jarvislauncher.databinding.ItemAppIconBinding
 
 /**
- * RecyclerView adapter for the app grid. Stub only — wire up once
- * activity_launcher.xml and item_app_icon.xml layouts exist.
+ * RecyclerView adapter for the app grid.
  */
 class AppDrawerAdapter(
     private val apps: List<InstalledApp>,
     private val onAppClick: (InstalledApp) -> Unit
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<AppDrawerAdapter.AppViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Inflate item_app_icon.xml, return a ViewHolder wrapping icon ImageView + label TextView")
+    class AppViewHolder(val binding: ItemAppIconBinding) : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
+        val binding = ItemAppIconBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return AppViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Bind apps[position].label and icon; set click listener to launch via PackageManager")
+    override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
+        val app = apps[position]
+        val pm = holder.itemView.context.packageManager
+        holder.binding.appIcon.setImageDrawable(pm.getApplicationIcon(app.appInfo))
+        holder.binding.appLabel.text = app.label
+        holder.binding.root.setOnClickListener { onAppClick(app) }
     }
 
     override fun getItemCount(): Int = apps.size
