@@ -1,6 +1,17 @@
 <resources>
-    <style name="Theme.JarvisLauncher" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- TODO: dark theme, cyan/blue accent per our HUD-style visual direction —
-             see frontend-design skill once we get to UI polish pass -->
+    <!-- Fixed dark HUD theme — deliberately NOT DayNight. A JARVIS-style launcher
+         shouldn't flip to a light variant when the system theme does. -->
+    <style name="Theme.JarvisLauncher" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/hud_cyan</item>
+        <item name="colorPrimaryDark">@color/hud_background</item>
+        <item name="colorSecondary">@color/hud_cyan</item>
+        <item name="colorOnSecondary">@color/hud_background</item>
+        <item name="colorSurface">@color/hud_surface</item>
+        <item name="colorOnSurface">@color/hud_text_primary</item>
+        <item name="android:colorBackground">@color/hud_background</item>
+        <item name="colorOnBackground">@color/hud_text_primary</item>
+        <item name="android:textColorPrimary">@color/hud_text_primary</item>
+        <item name="android:textColorSecondary">@color/hud_text_dim</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

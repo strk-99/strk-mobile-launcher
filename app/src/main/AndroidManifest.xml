@@ -48,6 +48,10 @@
         </activity>
 
         <activity
+            android:name=".launcher.AppDrawerActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".settings.SettingsActivity"
             android:exported="false" />
 

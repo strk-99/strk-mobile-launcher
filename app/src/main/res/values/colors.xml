@@ -1,3 +1,13 @@
 <resources>
     <color name="ic_launcher_background">#0F1B2B</color>
+
+    <!-- HUD palette — "Hi Strk" visual identity (see README's UI polish pass note).
+         Fixed dark, not day/night: a JARVIS-style launcher shouldn't flip to light. -->
+    <color name="hud_background">#05080D</color>
+    <color name="hud_surface">#0B1420</color>
+    <color name="hud_surface_raised">#111D2C</color>
+    <color name="hud_cyan">#38E1FF</color>
+    <color name="hud_cyan_dim">#1B4A57</color>
+    <color name="hud_text_primary">#E8FBFF</color>
+    <color name="hud_text_dim">#7FA7B5</color>
 </resources>

@@ -4,4 +4,5 @@
     <string name="voice_toggle_description">When on, listens in the background for the wake word. Uses a small amount of battery while active.</string>
     <string name="search_hint">Search apps</string>
     <string name="mic_fab_description">Voice assistant</string>
+    <string name="app_drawer_description">All apps</string>
 </resources>
